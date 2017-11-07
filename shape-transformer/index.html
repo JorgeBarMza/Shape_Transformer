@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="../p5.min.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1 align="center">Shape Transformer</h1>
+    <div id="sketch-holder"></div>
+    <div class=buttons>
+      <button onclick="drawPolygon()">Polygon</button>
+      <button onclick="drawArc()">Arc</button>
+      <button onclick="drawRectPrism()">Rectangular Prism</button>
+      <button onclick="drawTriangPrism()">Triangular Prism</button>
+      <button onclick="drawCone()">Cone</button>
+    </div>
+    <div class="buttons">
+      <button onclick="setup()">Clear</button>
+      <button onclick="finishPolygon()" class="vertices-info">End Input</button>
+    </div>
+    <br>
+    <p class="buttons vertices-info">Select vertices by clicking inside the canvas, then click "End Input"</p>
+  </body>
+</html>
