@@ -10,9 +10,21 @@ function setup() {
   canvas.parent('sketch-holder');
 
   background(0,0,128);
-  fill(256,256,256)
+  fill(256,256,256);
+  noFill();
   stroke(256,0,0);
 }
+
+// function setup3d() {
+//   var canvas =   createCanvas(500, 500, WEBGL);
+//   // Move the canvas so it's inside our <div id="sketch-holder">.
+//   canvas.parent('sketch-holder');
+//
+//   background(0,0,128);
+//   fill(256,256,256);
+//   noFill();
+//   stroke(256,0,0);
+// }
 
 function draw() {
 
@@ -34,14 +46,18 @@ function mouseReleased(){
   }
 }
 
-function hideOrDisplay(id){
+function hide(id){
   let divToHide = document.getElementById(id);
-  let status = divToHide.style.display;
-  divToHide.style.display = (status == 'none')? 'flex':'none';
+  divToHide.style.display = 'none';
+}
+
+function display(id){
+  let divToHide = document.getElementById(id);
+  divToHide.style.display = 'flex';
 }
 
 function drawPolygon(){
-  hideOrDisplay('shape-container');
+  hide('shape-container');
   // show instructions
   var cols = document.getElementsByClassName('vertices-info');
   for(i=0; i<cols.length; i++) {
@@ -52,40 +68,41 @@ function drawPolygon(){
 }
 
 function drawCube(){
-  hideOrDisplay('shape-container');
-  hideOrDisplay('transformations-container');
-  createCanvas(1000, 1000, WEBGL);
+  hide('shape-container');
+  display('transformations-container');
+  setup3d();
   box(100, 100, 100);
   lastDrawF = drawCube;
 }
 
 function drawArc(){
-  hideOrDisplay('shape-container');
-  hideOrDisplay('transformations-container');
+  hide('shape-container');
+  display('transformations-container');
+
   arc(100, 100, 100, 100, PI, 0);
   lastDrawF = drawArc;
 }
 
 function drawRectPrism(){
-  hideOrDisplay('shape-container');
-  hideOrDisplay('transformations-container');
+  hide('shape-container');
+  display('transformations-container');
   createCanvas(1000, 1000, WEBGL);
   lastDrawF = drawRectPrism;
 }
 
 function drawTriangPrism(){
-  hideOrDisplay('shape-container');
-  hideOrDisplay('transformations-container');
+  hide('shape-container');
+  display('transformations-container');
   createCanvas(1000, 1000, WEBGL);
-  lastDrawF = drawRectPrism;
+  lastDrawF = drawTriangPrism;
 }
 
 function drawCone(){
-  hideOrDisplay('shape-container');
-  hideOrDisplay('transformations-container');
-  createCanvas(1000, 1000, WEBGL);
-  box(100, 100, 100);
-  lastDrawF = drawCube;
+  hide('shape-container');
+  display('transformations-container');
+  // setup3d();
+  cone(200, 200);
+  lastDrawF = drawCone;
 }
 
 function finishPolygon(){
@@ -108,7 +125,7 @@ function finishPolygon(){
   }
 
   lastDrawF = finishPolygon;
-  hideOrDisplay('transformations-container');
+  display('transformations-container');
 }
 
 function rotateMatrix(){
@@ -117,14 +134,28 @@ function rotateMatrix(){
 }
 
 function translateMInput(){
-  hideOrDisplay('slide-cointainer');
+  hide('transformations-container');
+  display('translate-slide-cointainer');
   currentT = translateM;
 }
 
+function scaleMInput(){
+  hide('transformations-container');
+  display('scale-slide-cointainer');
+  currentT = scaleM;
+}
+
 function translateM(){
-  let xShift = document.getElementById('x-slider').value;
-  let yShift = document.getElementById('y-slider').value;
-  applyMatrix(1, 0, 0, 1, xShift, yShift);
+  let xShift = document.getElementById('x-slider-translate').value;
+  let yShift = document.getElementById('y-slider-translate').value;
+  applyMatrix(1, 0, 0, 1, xShift, -yShift);
+  lastDrawF();
+}
+
+function scaleM(){
+  let xShift = document.getElementById('x-slider-scale').value;
+  let yShift = document.getElementById('y-slider-scale').value;
+  applyMatrix(xShift, 0, 0, yShift, 0, 0);
   lastDrawF();
 }
 
