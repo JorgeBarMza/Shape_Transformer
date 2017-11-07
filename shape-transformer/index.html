@@ -10,20 +10,52 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+
     <h1 align="center">Shape Transformer</h1>
     <div id="sketch-holder"></div>
-    <div class=buttons>
+    <br>
+
+    <div id="shape-container" class=center>
+      <p>Choose a shape: </p>
       <button onclick="drawPolygon()">Polygon</button>
       <button onclick="drawArc()">Arc</button>
       <button onclick="drawRectPrism()">Rectangular Prism</button>
       <button onclick="drawTriangPrism()">Triangular Prism</button>
       <button onclick="drawCone()">Cone</button>
     </div>
-    <div class="buttons">
-      <button onclick="setup()">Clear</button>
+
+    <div id="polygon-process-container" class="buttons">
+      <p class="buttons vertices-info">Select vertices by clicking inside the canvas, then click "End Input"</p>
+      <br>
       <button onclick="finishPolygon()" class="vertices-info">End Input</button>
     </div>
+
+    <div id="transformations-container" class="center" style="display: none">
+      <p>Transformations: </p>
+      <button onclick="translateMInput()">Translate</button>
+      <button onclick="rotateMInput()">Rotate</button>
+      <button onclick="scaleMInput()">Scale</button>
+      <button onclick="reflectM()">Reflect</button>
+    </div>
+
+    <div class="center" id="slide-cointainer" style="display: none">
+      <p>X:</p>
+      <input type="range" min="-250" max="250" value="0" class="slider" id="x-slider">
+      <p>Y:</p>
+      <input type="range" min="-250" max="250" value="0" class="slider" id="y-slider">
+      <button onclick="currentT()">End Input</button>
+    </div>
+
+    <div class="center" id="angle-container" style="display: none">
+      <p>Angle:</p>
+      <input type="range" min="0" max="360" value="0" class="slider" id="angle-slider">
+    </div>
+
     <br>
-    <p class="buttons vertices-info">Select vertices by clicking inside the canvas, then click "End Input"</p>
+    <div class="center">
+      <button class="center" onclick="clearUI()">Clear</button>
+    </div>
+    <br>
+
   </body>
 </html>
