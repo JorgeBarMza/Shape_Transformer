@@ -6,9 +6,7 @@ var lastDrawF, currentT;
 
 function setup() {
   var canvas = createCanvas(500, 500);
-  // Move the canvas so it's inside our <div id="sketch-holder">.
   canvas.parent('sketch-holder');
-
   background(0,0,128);
   fill(256,256,256);
   noFill();
@@ -81,26 +79,67 @@ function drawArc(){
   arc(255, 255, 200, 200, PI, 0);
   lastDrawF = drawArc;
 }
-
+function drawCube(){
+  hide('shape-container');
+  display('transformations-container');
+  let x1 = 100;
+  let y1 = 100;
+  let s = 100;
+  let c = s/2;
+  rect(x1,y1,s,s);
+  rect(x1+c,y1+c,s,s);
+  line(x1,y1,x1+c,y1+c);
+  line(x1+s,y1,x1+c+s,y1+c);
+  line(x1,y1+s,x1+c,y1+s+c);
+  line(x1+s,y1+s,x1+s+c,y1+s+c);
+  lastDrawF = drawCube;
+}
 function drawRectPrism(){
   hide('shape-container');
   display('transformations-container');
-  createCanvas(1000, 1000, WEBGL);
+  let x1 = 100;
+  let y1 = 100;
+  let w = 100;
+  let h = 50;
+  let c = 100;
+  rect(x1,y1,w,h);
+  rect(x1+c,y1+c,w,h);
+  line(x1,y1,x1+c,y1+c);
+  line(x1+w,y1,x1+w+c,y1+c);
+  line(x1,y1+h,x1+c,y1+h+c);
+  line(x1+w,y1+h,x1+w+c,y1+h+c);
   lastDrawF = drawRectPrism;
 }
 
 function drawTriangPrism(){
+
   hide('shape-container');
   display('transformations-container');
-  createCanvas(1000, 1000, WEBGL);
+  let x1 = 250;
+  let y1 = 250;
+  let x2 = 200;
+  let y2 = 300;
+  let x3 = 300;
+  let y3 = 300;
+  let c = 100;
+  triangle(x1,y1,x2,y2,x3,y3);
+  triangle(x1+c,y1+c,x2+c,y2+c,x3+c,y3+c);
+  line(x1,y1,x1+c,y1+c);
+  line(x2,y2,x2+c,y2+c);
+  line(x3,y3,x3+c,y3+c);
   lastDrawF = drawTriangPrism;
 }
 
 function drawCone(){
   hide('shape-container');
   display('transformations-container');
-  // setup3d();
-  cone(200, 200);
+  let x1 = 250;
+  let y1 = 250;
+  let w = 100;
+  let h = w/4
+  ellipse(x1,y1,w,h);
+  line(x1-w/2,y1,x1,y1-50);
+  line(x1+w/2,y1,x1,y1-50)
   lastDrawF = drawCone;
 }
 
@@ -178,6 +217,3 @@ function reflectM(){
   applyMatrix(0, 1, 1, 0, 0, 0);
   lastDrawF();
 }
-
-// sacle, translate: x(int),y(int)
-// rotate angle (int)
