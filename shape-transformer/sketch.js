@@ -78,8 +78,7 @@ function drawCube(){
 function drawArc(){
   hide('shape-container');
   display('transformations-container');
-
-  arc(100, 100, 100, 100, PI, 0);
+  arc(255, 255, 200, 200, PI, 0);
   lastDrawF = drawArc;
 }
 
@@ -128,27 +127,39 @@ function finishPolygon(){
   display('transformations-container');
 }
 
-function rotateMatrix(){
-  // x'= x*cos(theta) - y*sin(theta)
-  applyMatrix(10,1,1,1,10,10);
-}
-
 function translateMInput(){
   hide('transformations-container');
-  display('translate-slide-cointainer');
+  display('translate-slide-container');
   currentT = translateM;
 }
 
 function scaleMInput(){
   hide('transformations-container');
-  display('scale-slide-cointainer');
+  display('scale-slide-container');
   currentT = scaleM;
+}
+
+function rotateMInput(){
+  hide('transformations-container');
+  display('angle-container');
+  currentT = rotateM;
+}
+
+function rotateM(){
+  let angle = document.getElementById('angle-slider').value;
+  console.log(angle);
+  let cos_a = cos(angle);
+  let sin_a = sin(angle);
+  applyMatrix(cos_a, sin_a, -sin_a, cos_a, 0, 0);
+  hide('angle-container');
+  lastDrawF();
 }
 
 function translateM(){
   let xShift = document.getElementById('x-slider-translate').value;
   let yShift = document.getElementById('y-slider-translate').value;
   applyMatrix(1, 0, 0, 1, xShift, -yShift);
+  hide('translate-slide-container');
   lastDrawF();
 }
 
@@ -156,15 +167,16 @@ function scaleM(){
   let xShift = document.getElementById('x-slider-scale').value;
   let yShift = document.getElementById('y-slider-scale').value;
   applyMatrix(xShift, 0, 0, yShift, 0, 0);
+  hide('translate-slide-container');
   lastDrawF();
 }
 
-function scaleMatrix(){
-  applyMatrix(10,1,1,1,10,10);
-}
-
-function reflectMatrix(){
-  applyMatrix(10,1,1,1,10,10);
+function reflectM(){
+  stroke(0,255,0);
+  line(0,0,500,500);
+  stroke(256,0,0);
+  applyMatrix(0, 1, 1, 0, 0, 0);
+  lastDrawF();
 }
 
 // sacle, translate: x(int),y(int)
