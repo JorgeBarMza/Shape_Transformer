@@ -206,7 +206,7 @@ function scaleM(){
   let xShift = document.getElementById('x-slider-scale').value;
   let yShift = document.getElementById('y-slider-scale').value;
   applyMatrix(xShift, 0, 0, yShift, 0, 0);
-  hide('translate-slide-container');
+  hide('scale-slide-container');
   lastDrawF();
 }
 
