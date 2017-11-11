@@ -11,6 +11,9 @@ function setup() {
   fill(256,256,256);
   noFill();
   stroke(256,0,0);
+
+  // ddaLine(300,300,50,50);
+  // line(90,90,340,340);
 }
 
 // function setup3d() {
@@ -54,6 +57,65 @@ function display(id){
   divToHide.style.display = 'flex';
 }
 
+function ddaLine(x1, y1, x2, y2){
+  let dx = x2-x1;
+  let dy = y2-y1;
+
+  let steps = abs(dx) > abs(dy) ? abs(dx):abs(dy);
+
+  let xInc = dx/steps;
+  let yInc = dy/steps;
+
+  let x = x1;
+  let y = y1;
+  let points = [];
+  for(let i = 0; i<=steps; ++i){
+    x+=xInc;
+    y+=yInc;
+    point(x,y);
+  }
+}
+
+function midPointArc(centerX, centerY, r){
+    let x = r;
+    let y = 0;
+
+    point(x + centerX, y + centerY);
+
+    if (r > 0){
+        point(x + centerX, -y + centerY);
+        point(y + centerY, x + centerX);
+        point(-y + centerY, x + centerX);
+    }
+
+    let P = 1 - r;
+    while (x > y){
+        y++;
+        if (P <= 0){
+            P = P + 2*y + 1;
+        }
+        else{
+            x--;
+            P = P + 2*y - 2*x + 1;
+        }
+
+        if (x < y)
+            break;
+
+        // point(x + centerX, y + centerY);
+        // point(-x + centerX, y + centerY);
+        point(x + centerX, -y + centerY);
+        point( -x + centerX, -y + centerY);
+
+        if (x != y){
+            // point(y + centerY, x + centerX);
+            // point(-y + centerY, x + centerX);
+            point(y + centerY, -x + centerX);
+            point( -y + centerY, -x + centerX);
+        }
+    }
+}
+
 function drawPolygon(){
   hide('shape-container');
   // show instructions
@@ -76,7 +138,8 @@ function drawCube(){
 function drawArc(){
   hide('shape-container');
   display('transformations-container');
-  arc(255, 255, 200, 200, PI, 0);
+  // arc(255, 255, 200, 200, PI, 0);
+  midPointArc(255, 255, 200);
   lastDrawF = drawArc;
 }
 function drawCube(){
